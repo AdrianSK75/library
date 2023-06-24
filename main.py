@@ -1,10 +1,14 @@
 from View.console import Console
+from Tests.crud_book_tests import CRUDTests
 
 def main():
+    books = []
+
     while True:
         print("Press 1 to print 'Hello World'!")
         print("Press 2 to print the library console")
-        print("Press 3 to close the main console")
+        print("Press 3 to print the library tests")
+        print("Press 4 to close the main console")
 
         option = input("Give the option: ")
         console = Console()
@@ -12,7 +16,9 @@ def main():
         if option == "1":
             print("\nHello World!\n")
         elif option == "2":
-            console.execute_commands()
+            console.execute_commands(books)
+        elif option == "3":
+            console.execute_commands(books)
         else:
             print("\nClosing the console....\n")
             break
