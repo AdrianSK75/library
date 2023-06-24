@@ -1,0 +1,2 @@
+class CRUDTests:
+    pass
