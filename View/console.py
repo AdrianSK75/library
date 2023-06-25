@@ -8,7 +8,8 @@ class Console:
             print("Press 3 to add a Book to Library")
             print("Press 4 to edit a Book from Library")
             print("Press 5 to remove a Book from Library")
-            print("Press 6 to exit the Library Console\n")
+            print("Press 6 to seed with books data")
+            print("Press 7 to exit the Library Console\n")
 
             option = input("Give the option: ")
             book_controller = BookController(books)
@@ -16,14 +17,16 @@ class Console:
             if option == "1":
                 print(book_controller.get_all())
             elif option == "2":
-                print("Print one book")
+                print(book_controller.get_by_id())
             elif option == "3":
                 print(book_controller.create())
                 print("\n")
             elif option == "4":
                 print(book_controller.edit())
             elif option == "5":
-                print("Remove one book")
+                print(book_controller.remove())
             elif option == "6":
+                print(book_controller.seed_with_books())
+            elif option == "7":
                 print("Closing the Library Console...")
                 break

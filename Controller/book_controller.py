@@ -8,6 +8,27 @@ class BookController:
         print("Print all books")
         return self.books
 
+    def seed_with_books(self):
+        length = len(self.books)
+
+        length+=1
+        book1 = Book(length, "10X Rules", "Sales", 24.5, "silver")
+        self.books.append(book1.get_book())
+
+        length+=1
+        book2 = Book(length, "The Lean Startup", "Business", 60, "gold")
+        self.books.append(book2.get_book())
+
+        length+=1
+        book3 = Book(length, "Limitless", "Mind Hack", 20, "bronze")
+        self.books.append(book3.get_book())
+
+        length+=1
+        book4 = Book(length, "How to win friends, and influence people", "Comunication", 35.5, "bronze")
+        self.books.append(book4.get_book())
+
+        return self.get_all()
+
     def get_by_id(self):
         book_item = input("\nWrite an id by you can get a book: \n")
 
@@ -23,7 +44,7 @@ class BookController:
         if len(book[2]) < 3:
             return [False, "The genre is to shorter"]
 
-        if book[3] is ["bronze", "silver", "gold"]:
+        if book[3] is ["none", "bronze", "silver", "gold"]:
             return [False, "The discount is not bronze, silver or gold"]
 
         return True
@@ -33,7 +54,7 @@ class BookController:
         title = input("Set title: ")
         genre = input("Set Genre: ")
         price = int(input("Set Price: "))
-        discount = input("Set discount (bronze | silver | gold): ")
+        discount = input("Set discount (none bronze | silver | gold): ")
 
         new_book = Book(id, title, genre, price, discount)
 
@@ -46,37 +67,24 @@ class BookController:
             return new_book.get_book()
         return print(validate_book[1])
 
-
     def edit(self):
-        books = self.books
         book_id = int(input("\nGive the book id: "))
-        item_id = "YES"
-        edit_property = "T"
-        to_edit_book = []
-        print(book_id)
-
-        return "Working to it!"
+        title = input("Reset title: ")
+        genre = input("Reset Genre: ")
+        price = int(input("Reset Price: "))
+        discount = input("Reset discount ( none | bronze | silver | gold): ")
+        books = []
 
         for book in self.books:
             if book_id == book[0]:
-                to_edit_book = book
-
-        while True:
-            is_stopped = int(input("If you want to stop editing the book you can write 0, if not write 1"))
-            item_id = int(input("Provide an id property from 1 to 4: "))
-            edit_property = input("Provide a new property value: ")
-
-            if is_stopped == 0:
-                break
-
-            if item_id >= 1 or item_id <= 4:
-                to_edit_book[item_id] = edit_property
+                edit_book = Book(book_id, title, genre, price, discount)
+                books.append(edit_book.get_book())
             else:
-                print("You need to provide the corect index!")
+                books.append(book)
 
+        self.books = books
 
-        print(to_edit_book)
-
+        return self.books
 
     def remove(self):
         book_id = int(input("\nGive the id to remove the book: "))
@@ -87,6 +95,10 @@ class BookController:
                 books.append(book)
 
         self.books = books
+
+        print(self.books)
+
+        return "The book was removed successfully!"
 
 
 
